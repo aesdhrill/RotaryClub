@@ -1,0 +1,68 @@
+version: '3.7'
+
+networks:
+  rotary:
+    driver: overlay
+    external: false
+
+services:
+  php:
+    volumes:
+      - ./symfony/:/var/www/symfony/
+    networks:
+      - rotary
+    labels:
+      - "traefik.enable=false"
+
+  nginx:
+    volumes:
+      - ./symfony/:/var/www/symfony/
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - rotary
+    environment:
+      - "TZ=Europe/Warsaw"
+
+  postgres:
+    image: postgres:14-alpine
+    volumes:
+      - postgres-db-rotary:/var/lib/postgresql/data
+    networks:
+      - rotary
+    env_file: ./symfony/.env.local
+    labels:
+      - "traefik.enable=false"
+
+  postgres-backup:
+    image: prodrigestivill/postgres-backup-local:14
+    env_file: ./symfony/.env.local
+    user: postgres:postgres
+    volumes:
+      - ./backups/postgres:/backups
+    networks:
+      - rotary
+    depends_on:
+      - postgres
+    labels:
+      - "traefik.enable=false"
+    healthcheck:
+      disable: true
+
+#  cron:
+#    volumes:
+#      - ./docker/php/cron/:/etc/cron.d/
+#      - ./symfony/:/var/www/symfony/
+#      - ./cli/:/var/www/cli/
+#      - ./backups/postgres:/backups/postgres
+#      - ./symfony/public/uploads-real:/backups/uploads
+#    networks:
+#      - rotary
+#    command: ["cron", "-f"]
+#    labels:
+#      - "traefik.enable=false"
+
+volumes:
+  postgres-db-rotary:
+    name: postgres-db-rotary
+    external: true

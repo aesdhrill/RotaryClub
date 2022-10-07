@@ -1,0 +1,3 @@
+0 14 * * * /usr/local/bin/php /var/www/symfony/bin/console app:notify:upcoming-visit:tomorrow > /proc/1/fd/1 2>/proc/1/fd/2
+0 14 * * 5 /usr/local/bin/php /var/www/symfony/bin/console app:notify:upcoming-visit:next-week > /proc/1/fd/1 2>/proc/1/fd/2
+0 3 * * * sh /var/www/cli/prod/backup/rsync > /proc/1/fd/1 2>/proc/1/fd/2

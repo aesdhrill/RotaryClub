@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  php:
+    container_name: lama_php
+    build: ./docker/php
+    restart: always
+    user: "<CURRENT-ID>:1000"
+
+  nginx:
+    build: ./docker/nginx
+    restart: always
+    ports:
+      - "<PUBLIC_PORT>:80"
+    depends_on:
+      - php
+
+#  postgres:
+#    restart: always
+#    ports:
+#      - "5432:5432"
+
+  cron:
+    build: ./docker/php
+    restart: always
+#    volumes:
+      # Directory for remote backups
+#      - <BACKUP_FOLDER_PATH>:/remote-backups

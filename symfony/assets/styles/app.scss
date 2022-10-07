@@ -1,0 +1,406 @@
+$primary: #f77702;
+$secondary: #578ad6;
+$screening: #75ce7b;
+
+:root {
+    --primary: $primary;
+    --secondary: $secondary;
+}
+
+//@import "~startbootstrap-sb-admin/src/scss/styles";
+//@import "~select2";
+//@import "bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css";
+
+//@import "colors";
+
+body {
+    background-color: #ffffff;
+}
+
+h1 {
+    font-size: 2.25rem !important;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.75rem !important;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1.25rem !important;
+    font-weight: bold;
+}
+
+.fa-spin-pulse {
+    height: 0.92em;
+}
+
+.cookie-box {
+    padding-left: 225px !important;
+}
+
+.select2 {
+    width: 100% !important;
+
+    .select2-selection {
+        border: 1px solid #ced4da;
+
+        &.select2-selection--single {
+            height: 38px;
+
+            .select2-selection__rendered {
+                line-height: 36px;
+                color: #212529;
+            }
+
+            .select2-selection__arrow {
+                height: 36px;
+            }
+        }
+
+        &.select2-selection--multiple {
+            min-height: 38px;
+            padding-bottom: 10px;
+
+            .select2-selection__rendered {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0;
+                line-height: 34px;
+
+                .select2-selection__choice {
+                    padding: 0 .65em;
+                    border: 1px solid #ced4da;
+                    background: #ffffff;
+
+                    .select2-selection__choice__remove {
+                        font-size: 1.25em;
+                        border-right: 1px solid #ced4da;
+                    }
+
+                    .select2-selection__choice__display {
+                        padding-left: 20px;
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.select2-container {
+    .select2-results__options {
+        max-height: 350px !important;
+    }
+}
+
+.overlay-wrapper {
+    position: relative;
+
+    .overlay-spinner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    .response-message {
+        display: block;
+        width: 100%;
+        padding: 0.25em;
+        font-weight: bold;
+    }
+}
+
+.form-label, .col-form-label {
+    font-weight: bold;
+    padding-top: 0;
+}
+
+.form-label.required::after, .col-form-label.required::after,
+.form-label.conditional_required::after, .col-form-label.conditional_required::after,
+.required-check + .form-check-label.required::after {
+    content: " *";
+    color: red;
+    font-weight: bold;
+}
+
+.form-label, .col-form-label, .required-check + .form-check-label {
+    &.required-finished:not(.required) {
+        &::after {
+            content: " *";
+            color: blue;
+            font-weight: bold;
+        }
+    }
+}
+
+.label-pb-0 {
+    padding-bottom: 0;
+}
+
+.radio-group-label {
+    margin-left: -7px;
+}
+
+.btn-primary {
+    color: #ffffff;
+
+    &:hover {
+        background-color: darken($primary, 10);
+        border-color: darken($primary, 10);
+        color: #ffffff;
+    }
+}
+
+.btn-secondary {
+    color: #ffffff;
+
+    &:hover {
+        background-color: darken($secondary, 10);
+        border-color: darken($secondary, 10);
+        color: #ffffff;
+    }
+}
+
+input {
+    &.is-featured {
+        border-color: $primary !important;
+        background-color: lighten($primary, 35) !important;
+    }
+
+    & + .featured-feedback {
+        color: $primary;
+        margin-top: 0.25rem;
+        font-size: 80%;
+    }
+}
+
+.images-login {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        height: 50px;
+    }
+}
+
+.images-login-main img {
+    width: 100%;
+    max-width: 150px;
+}
+
+.nav {
+    & > span {
+        color: #ffffff;
+
+        & > hr {
+            margin: 0.25em;
+
+            &:first-child {
+                height: 3px;
+            }
+        }
+
+        & > div {
+            //background: #f77702;
+            text-align: center;
+            //text-align: right;
+            //padding-left: 1rem;
+            //padding-right: 1rem;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.nav-link {
+    color: #ffffff !important;
+
+    &.current {
+        background: darken($secondary, 10);
+    }
+
+    &[role="tab"]:not(.active) {
+        color: black !important;
+    }
+
+    .sb-nav-link-icon {
+        color: inherit !important;
+        width: 25px;
+    }
+}
+
+.card-header {
+    font-weight: bold;
+
+    .col-form-label {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+[data-bs-toggle="collapse"] {
+    &.card-header {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        cursor: pointer;
+
+        &::after {
+            font-family: "Font Awesome 5 Pro";
+        }
+
+        &.collapsed {
+            &::after {
+                content: "\f078"; // chevron-down
+            }
+        }
+
+        &:not(.collapsed) {
+            &::after {
+                content: "\f077"; // chevron-up
+            }
+        }
+    }
+}
+
+.table {
+    &.table-rowspan-striped {
+        tbody:nth-child(odd) {
+            background: var(--bs-table-striped-bg);
+        }
+
+        tbody {
+            border: none;
+
+            &:hover {
+                td[rowspan] {
+                    background: lighten($secondary, 25);
+                }
+            }
+
+            tr {
+                border-color: rgb(222, 226, 230);
+
+                &:hover {
+                    td {
+                        background: lighten($secondary, 25);
+                    }
+                }
+            }
+        }
+    }
+
+    & > :not(:first-child) {
+        border-top: initial;
+    }
+
+    &.table-align-middle {
+        tbody {
+            td {
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.input-group {
+    & > .input-group-append {
+        & > .input-group-text {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        select {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+}
+
+.dropdown-menu-right {
+    left: auto !important;
+    right: 0 !important;
+}
+
+.bg-warning-light {
+    --bs-bg-opacity: 1;
+    background-color: #fff993 !important;
+}
+
+hr.ecrf {
+    border-top: 5px solid;
+    border-radius: 3px;
+}
+
+zbimt.diagonal-box {
+    background-color: rgba(250, 255, 0);
+    width: 335px;
+    height: 60px;
+    line-height: 60px;
+    z-index: 1070;
+    top: 35px;
+    left: -77px;
+    text-align: center;
+    opacity: 0.6;
+    pointer-events: none;
+    transform: rotate(325deg);
+    display: block;
+    position: fixed;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+// # TODO: move to separate file
+.datepicker {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+
+    table {
+        tr {
+            td {
+                width: 40px;
+            }
+        }
+    }
+}
+
+// # TODO: move to separate file
+.delete_file {
+    width: 40px;
+    height: 40px;
+    color: $primary;
+}
+
+.delete_file:hover {
+    color: #fff;
+}
+
+// TinyMCE
+//textarea.tinymce {
+//    display: block !important;
+//    max-height: 0;
+//    min-height: 0;
+//    border: 1px solid white;
+//    padding: 0;
+//
+//    &:focus {
+//        box-shadow: none;
+//        border-color: white;
+//    }
+//}
+
+textarea.tinymce.is-invalid ~ .tox-tinymce {
+    border: 1px solid #dc3545;
+}
