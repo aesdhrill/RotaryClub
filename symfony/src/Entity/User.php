@@ -25,11 +25,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[ORM\Column(type: 'text', length: 180, unique: true)]
     #[Assert\Email(groups: ['signup'])]
     private string $email;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(groups: ['signup'])]
     #[Assert\Length(min: 8, groups: ['signup'])]
     private string $password;
@@ -37,21 +37,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     #[Assert\NotBlank]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     #[Assert\NotBlank]
     private ?string $surname = null;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    #[Assert\NotBlank]
-    private ?string $city = null;
-
-    #[ORM\Column(type: 'string', nullable: true)]
-    #[Assert\NotBlank]
-    private ?string $country = null;
+    #[ORM\OneToOne(targetEntity: 'Address')]
+    #[ORM\JoinColumn(name: 'address_id', referencedColumnName: 'id')]
+    private ?Address $address = null;
 
     #[Orm\Column(type: 'date_immutable')]
     private \DateTimeImmutable $createdAt;
@@ -154,35 +150,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return string|null
+     * @return Address|null
      */
-    public function getCity(): ?string
+    public function getAddress(): ?Address
     {
-        return $this->city;
+        return $this->address;
     }
 
     /**
-     * @param string|null $city
+     * @param Address|null $address
      */
-    public function setCity(?string $city): void
+    public function setAddress(?Address $address): void
     {
-        $this->city = $city;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param string|null $country
-     */
-    public function setCountry(?string $country): void
-    {
-        $this->country = $country;
+        $this->address = $address;
     }
 
     /**
@@ -206,8 +186,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
-
-
-
-
 }
