@@ -8,5 +8,19 @@
 // any CSS you import will output into a single css file (app.scss in this case)
 import '../styles/app.scss';
 
+let colorPrimary = '#fd912f';
+let colorSecondary = '#578ad6';
+
+const $ = require('jquery');
+global.$ = global.jQuery = $;
+
 // start the Stimulus application
 import '../bootstrap';
+const bootstrap = require('bootstrap/dist/js/bootstrap.bundle.min');
+global.bootstrap = bootstrap;
+
+$(function() {
+  $('[data-bs-toggle="tooltip"]').each(function (_, ee) {
+    return new bootstrap.Tooltip(ee)
+  });
+})
