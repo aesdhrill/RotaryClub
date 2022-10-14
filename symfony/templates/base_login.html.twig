@@ -15,29 +15,29 @@
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-3 mb-4">
                     <div class="images images-login mb-4">
-                        {#                        <a href="https://umed.pl/"><img src="{{ asset('build/images/umed_logo.png') }}"></a>#}
-                        {#                        <a href="https://biostat.umed.pl/"><img src="{{ asset('build/images/btm_logo.png') }}"></a>#}
+{#                                                <a href="https://umed.pl/"><img src="{{ asset('build/images/umed_logo.png') }}"></a>#}
+{#                                                <a href="https://biostat.umed.pl/"><img src="{{ asset('build/images/btm_logo.png') }}"></a>#}
                     </div>
-                    {#                    {% include 'system/parts/flashes.html.twig' %}#}
+                    {% include 'parts/flashes.html.twig' %}
                     {% block content %}{% endblock %}
                     <div class="d-flex justify-content-between align-items-baseline">
                         <div class="col-4">
                             <div>
                                 <p>
                                     <b>Kontakt w sprawach merytorycznych</b><br>
-                                    e-mail: <a href="mailto:agnieszka.butwicka@umed.lodz.pl">agnieszka.butwicka@umed.lodz.pl</a><br>
-                                    <a href="mailto:arkadiusz.michalak@umed.lodz.pl">arkadiusz.michalak@umed.lodz.pl</a>
+                                    e-mail: <a href="#">mail@1.pl</a><br>
+                                    tel. 42 123 45 67
                                 </p>
                             </div>
                         </div>
                         <div class="images-login-main col-4 text-center my-3 mx-3">
-                            {#                            <img src="{{ asset('build/images/lama_white_blue_circle.svg') }}">#}
+                                                        <img src="{{ asset('build/images/lama_white_blue_circle.svg') }}" alt="Logo projektu">
                         </div>
                         <div class="col-4">
                             <p>
                                 <b>Kontakt w sprawach technicznych</b><br>
-                                e-mail: <a href="mailto:lamaindiab.it@umed.lodz.pl">lamaindiab.it@umed.lodz.pl</a><br>
-                                tel. 42 272 53 86, 885 246 300
+                                e-mail: <a href="#">mail@2.pl</a><br>
+                                tel. 42 987 65 43
                             </p>
                         </div>
                     </div>
