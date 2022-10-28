@@ -2,5 +2,57 @@
 
 
 {% block content %}
-    hello
+    <div class="container">
+        <div class="row">
+            <div class="col" style="text-align: center; clear:both;">
+                <h1 class="h3 mb-0 text-gray-800">{{ 'page_titles.login_welcome'|trans }} {{ 'project.acronym'|trans }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-7 p-3 pt-5">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="email-addon" style="width: 100px">{{ 'common.email'|trans }}</span>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus aria-label="Email" aria-describedby="email-addon">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="email-addon" style="width: 100px">{{ 'common.password'|trans }}</span>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    </div>
+
+                    <div class="form-group" style="display: flex; justify-content: space-between;">
+{#                        <a href="{{ path('security_forgot_password') }}" class="btn btn-outline-dark">#}
+{#                            {{ 'common.forgot_password'|trans }}#}
+{#                        </a>#}
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <button class="btn btn-primary" type="submit">
+                            {{ 'common.log_in'|trans }}
+                        </button>
+                    </div>
+
+{#                    <a href="{{ path('manual_before_login') }}" class="btn btn-outline-dark mt-2">#}
+{#                        {{ 'common.instruction'|trans }}#}
+{#                    </a>#}
+
+                    {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    #}
+
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

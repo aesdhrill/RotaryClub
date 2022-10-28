@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <table id="user_list" class="table table-striped table-bordered table-hover table-responsive display w-100">
+        <colgroup>
+            <col style="width: 36px;">
+            <col style="width: 1fr">
+            <col style="width: 1fr">
+            <col style="width: 1fr">
+            <col style="width: 200px">
+            <col style="width: 100px">
+        </colgroup>
+        <thead>
+            <tr>
+                {# TODO: trans #}
+                <th>#</th>
+                <th>{{ 'user.fullname'|trans }}</th>
+                <th>{{ 'user.email'|trans }}</th>
+                <th>{{ 'user.role'|trans }}</th>
+                <th>{{ 'user.status'|trans }}</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user_list') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let dtAjaxPath = '{{ path('admin_users_dt') }}';
+        let userStatusBadges = {{ static('App\\Enum\\UserStatus', 'getStatusesFlipped')|map((name, status) => user_status_badge(status))|json_encode|raw }};
+    </script>
+    {{ encore_entry_script_tags('user_list') }}
+{% endblock %}

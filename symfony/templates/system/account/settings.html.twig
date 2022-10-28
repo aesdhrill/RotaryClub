@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% form_theme passwordForm 'bootstrap_5_layout.html.twig' %}
+    {% form_theme nameSurnameForm 'bootstrap_5_layout.html.twig' %}
+{#    {% form_theme phoneForm 'bootstrap_5_layout.html.twig' %}#}
+{#    {% form_theme psychiatristDataForm 'bootstrap_5_layout.html.twig' %}#}
+
+    {# TODO: if form errors in any hidden cards, show this card #}
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border-left-primary shadow mb-3">
+                <div class="card-header">
+                    {{ 'account.settings.my_data.title'|trans }}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <tr>
+                                    <td class="w-50">{{ 'account.settings.my_data.name_surname'|trans }}</td>
+                                    <td>
+                                        <div class="account_show" style="position: relative; padding-right: 40px;">
+                                            {{ user.fullname }}
+                                            <a class="btn btn-primary btn-sm account_edit_btn" style="position: absolute; right: 0; top: -3px;"><i class="fas fa-pencil-alt"></i></a>
+                                        </div>
+                                        <div class="account_edit_form collapse">
+                                            {{ form_start(nameSurnameForm) }}
+                                            {{ form_row(nameSurnameForm.name) }}
+                                            {{ form_row(nameSurnameForm.surname) }}
+
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <button class="btn btn-secondary btn-sm account_cancel_btn">{{ 'common.form.cancel'|trans }}</button>
+                                                {{ form_widget(nameSurnameForm.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+                                            </div>
+                                            {{ form_end(nameSurnameForm) }}
+                                        </div>
+                                    </td>
+
+                                </tr>
+{#                                <tr>#}
+{#                                    <td>{{ 'account.settings.my_data.pesel'|trans }}</td>#}
+{#                                    <td>{{ user.pesel }}</td>#}
+{#                                </tr>#}
+                                <tr>
+                                    <td>{{ 'account.settings.my_data.email'|trans }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'account.settings.my_data.valid_to'|trans }}</td>
+                                    <td>{{ user.validTo|date('Y-m-d') }}</td>
+                                </tr>
+                                {# todo: uncomment if we want to separate facilities #}
+{#                                {% if user.userFacilities is not empty %}#}
+{#                                    <tr>#}
+{#                                        <td>{{ 'account.settings.my_data.facilities'|trans }}</td>#}
+{#                                        <td>#}
+{#                                            {% for userFacility in user.userFacilities %}#}
+{#                                                {{ userFacility.facility.name }}<br>#}
+{#                                            {% endfor %}#}
+{#                                        </td>#}
+{#                                    </tr>#}
+{#                                {% endif %}#}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            {{ form_start(passwordForm) }}
+            <div class="card border-left-primary shadow">
+                <div class="card-header collapsed" data-bs-toggle="collapse" data-bs-target="#settings-password">
+                    {{ 'account.settings.change_password'|trans }}
+                </div>
+                <div class="card-body collapse" id="settings-password">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form_row(passwordForm.currentPassword) }}
+                                {{ form_row(passwordForm.password) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(passwordForm.save, {'attr': {'class': 'btn btn-primary font-weight-bold', 'style': 'width: 50%; margin-top: 20px; float: right'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(passwordForm) }}
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {#    {{ encore_entry_link_tags('patient_timeline') }}#}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('account_settings') }}
+{% endblock %}
+

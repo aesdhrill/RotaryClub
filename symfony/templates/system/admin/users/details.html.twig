@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% form_theme rolesForm 'bootstrap_5_layout.html.twig' %}
+    {% form_theme statusForm 'bootstrap_5_layout.html.twig' %}
+    {% form_theme expiryDateForm 'bootstrap_5_layout.html.twig' %}
+
+    <div class="row mb-3">
+        <div class="{{ singleCardColConfig }}">
+            <div class="card shadow">
+                <div class="card-header">
+                    {{ 'user.basic_data'|trans }}
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 200px">
+                        </colgroup>
+                        <tr>
+                            <td>{{ 'user.fullname'|trans }}:</td>
+                            <td>{{ user.fullname }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'user.email'|trans }}:</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'user.role'|trans }}:</td>
+                            <td>
+                                <div class="user_roles_show" style="position: relative; padding-right: 40px;">
+                                    {% for role in user.roles|filter(role => role != 'ROLE_USER') %}
+                                        <span class="badge text-dark border border-dark {% if role == 'ROLE_LIMITED' %}bg-orange-400{% endif %}" style="font-size: 0.8em;">
+                                                {{ ('user.roles.'~role)|trans }}
+                                            </span>
+                                    {% endfor %}
+                                    <a class="btn btn-primary btn-sm" id="user_roles_edit_btn" style="position: absolute; right: 0; top: -3px;"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+                                <div class="user_roles_edit_form collapse">
+                                    {{ form_start(rolesForm) }}
+                                    {{ form_widget(rolesForm.roles, {'attr': {'class': 'select2'}}) }}
+
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-primary btn-sm" id="user_roles_edit_cancel_btn">Cancel</button>
+                                        {{ form_widget(rolesForm.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+                                    </div>
+                                    {{ form_end(rolesForm) }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'user.status'|trans }}:</td>
+                            <td>
+                                <div class="user_status_show" style="position: relative; padding-right: 40px;">
+                                    {{ user_status_badge(user.status) }}
+                                    <a class="btn btn-primary btn-sm" id="user_status_edit_btn" style="position: absolute; right: 0; top: -3px;"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+                                <div class="user_status_edit_form collapse">
+                                    {{ form_start(statusForm) }}
+                                    {{ form_widget(statusForm.status) }}
+
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-primary btn-sm" id="user_status_edit_cancel_btn">Cancel</button>
+                                        {{ form_widget(statusForm.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+                                    </div>
+                                    {{ form_end(statusForm) }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'user.account_expiry_date'|trans }}</td>
+                            <td>
+                                <div class="user_expiry_date_show" style="position: relative; padding-right: 40px;">
+                                    {{ user.validTo |date('Y-m-d') }}
+                                    <a class="btn btn-primary btn-sm" id="user_expiry_date_edit_btn" style="position: absolute; right: 0; top: -3px;"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+                                <div class="user_expiry_date_edit_form collapse">
+                                    {{ form_start(expiryDateForm) }}
+                                    {{ form_widget(expiryDateForm.validTo) }}
+
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button class="btn btn-primary btn-sm" id="user_expiry_date_edit_cancel_btn">Cancel</button>
+                                        {{ form_widget(expiryDateForm.save, {'attr': {'class': 'btn btn-primary btn-sm'}}) }}
+                                    </div>
+                                    {{ form_end(expiryDateForm) }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+{#        <div class="col-6">#}
+{#            <div class="card shadow">#}
+{#                <div class="card-header">#}
+{#                    {{ 'user.basic_data'|trans }}#}
+{#                </div>#}
+{#                <div class="card-body">#}
+{#                    <table class="table">#}
+{#                        <colgroup>#}
+{#                            <col style="width: 140px">#}
+{#                        </colgroup>#}
+{#                        <tr>#}
+{#                            <td>{{ 'user.facility'|trans }}</td>#}
+{#                            <td>#}
+{#                                <ul>#}
+{#                                {% for facility in user.facilities %}#}
+{#                                    <li>#}
+{#                                        <a href="{{ path('admin_facilities_details', {'id': facility.id}) }}">#}
+{#                                        <p>{{ facility.name }}</p>#}
+{#                                        </a>#}
+{#                                    </li>#}
+{#                                {% endfor %}#}
+{#                                </ul>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    </table>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+
+    {# TODO: remove "and false" when change history fully works #}
+{#    {% if is_granted('ROLE_ADMINISTRATION') and false %}#}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <div class="card border-left-primary shadow pb-1">#}
+{#                <div class="card-header">#}
+{#                    Change history#}
+{#                </div>#}
+{#                <div class="card-body pb-0">#}
+{#                    <table class="table table-rowspan-striped">#}
+{#                        <tr>#}
+{#                            #}{# TODO: trans #}
+{#                            <th>How?</th>#}
+{#                            <th>When?</th>#}
+{#                            <th>What?</th>#}
+{#                            <th>Whom?</th>#}
+{#                            <th>What?</th>#}
+{#                            <th>From what?</th>#}
+{#                            <th>To what?</th>#}
+{#                        </tr>#}
+{#                        {% for change in logEntryHistory %}#}
+{#                            <tbody>#}
+{#                            {% for field, newData in change.data.new|default(null) %}#}
+{#                                <tr>#}
+{#                                    {% if loop.first %}#}
+{#                                        <td rowspan="{{ change.data.new|length }}" class="text-center align-middle">{{ loggable_action_badge(change.action) }}</td>#}
+{#                                        <td rowspan="{{ change.data.new|length }}" class="align-middle">{{ change.loggedAt|date('Y-m-d H:i') }}</td>#}
+{#                                        <td rowspan="{{ change.data.new|length }}" class="align-middle">{{ change.objectClass|split('\\')|last }}</td>#}
+{#                                        <td rowspan="{{ change.data.new|length }}">#}
+{#                                            {{ value_or_none(log_entry_object_anchor(change.objectClass, change.objectId)) }}#}
+{#                                        </td>#}
+{#                                    {% endif %}#}
+{#                                    <td>{{ (change.objectClass|split('\\')|last|snake ~ '.' ~ field)|snake|trans }}</td>#}
+{#                                    <td><b>{{ loggable_data(change.data.old[field]) }}</b></td>#}
+{#                                    <td><b>{{ loggable_data(newData) }}</b></td>#}
+{#                                </tr>#}
+{#                            {% endfor %}#}
+{#                            </tbody>#}
+{#                        {% else %}#}
+{#                            <tr>#}
+{#                                <td colspan="42" style="text-align: center">Brak historii, bardzo dziwne#}{# TODO: translation #}{#</td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                    </table>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    {% endif %}#}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('user_details') }}
+{% endblock %}
