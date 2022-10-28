@@ -4,6 +4,7 @@ networks:
   rotary:
     driver: overlay
     external: false
+    attachable: true
 
 services:
   php:

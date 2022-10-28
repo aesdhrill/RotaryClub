@@ -1,0 +1,120 @@
+account:
+  settings:
+    my_data:
+      title: 'Moje informacje'
+      name_surname: 'Imię i nazwisko'
+      valid_to: 'Konto ważne do'
+    change_password: 'Zmień hasło'
+
+common:
+  current_password: 'Current password'
+  new_password: 'New password'
+  repeat_new_password: 'Reenter new password'
+  delete_selected: 'Delete selected'
+  instruction: 'Manual'
+  back: 'Back'
+  yes: 'Yes'
+  no: 'No'
+  no_data: 'No data'
+  close: 'Close'
+  skip_temporary: 'Skip (temporarily)'
+
+  form:
+    answer_placeholder: 'Your answer...'
+    cancel: 'Cancel'
+    dropzone_placeholder: 'Drag and drop files to upload, or click to view current files'
+    file:
+      view_current: 'View current'
+    save: 'Save'
+    save_continue: 'Save and continue'
+    select_placeholder: 'Choose...'
+    send: 'Send'
+
+  log_in: 'Log in'
+  log_out: 'Log out'
+  email: 'Email'
+  password: 'Password'
+  forgot_password: 'Forgot my password'
+  none: 'None'
+
+menu:
+  admin: 'Administration'
+  admin_users: 'Users'
+  admin_users_new: 'New user'
+  dashboard: 'Dashboard'
+  settings: 'Account Settings'
+
+page_titles:
+  forgot_password: 'Przypomnienie hasła'
+  login_welcome: 'Logowanie do systemu badania'
+  set_password: 'Ustawianie hasła'
+
+project:
+  acronym: 'Rethink'
+  demo:
+    ribbon: 'Demo version'
+    alert:
+      alert: 'Attention'
+      main: 'This is a demo version of Rethink platform. Do not use real personal data of the patients. We do not guarantee permanent storage or migration of the data input into the production system.'
+
+  metadata:
+    #TODO: add metadata strings
+    description: ''
+    keywords: ''
+    author: ''
+
+security:
+  logout_tooltip: 'Po tym czasie bez aktywności zostaniesz wylogowany'
+  flashes:
+    invalid_token: 'Nieważny token. Proszę skorzystać z opcji resetowania hasła, żeby uzyskać nowy link.'
+    password_set: 'Hasło zostało zmienione.'
+    password_reset_link: 'Link do zmiany hasła został wysłany. Proszę sprawdzić instrukcje w mailu.'
+    wrong_token: 'Nieprawidłowy token. Proszę skorzystać z opcji resetowania hasła, żeby uzyskać nowy link.'
+
+test:
+  logged_in: 'You are now logged in!'
+
+user:
+  account_expiry_date: 'Account valid to'
+  address:
+    voivodeship:
+      name: 'Województwo'
+      voivodeships:
+        DOLNOSLASKIE: 'dolnośląskie'
+        KUJAWSKO_POMORSKIE: 'kujawsko-pomorskie'
+        LUBELSKIE: 'lubelskie'
+        LUBUSKIE: 'lubuskie'
+        LODZKIE: 'łódzkie'
+        MALOPOLSKIE: 'małopolskie'
+        MAZOWIECKIE: 'mazowieckie'
+        OPOLSKIE: 'opolskie'
+        PODKARPACKIE: 'podkarpackie'
+        PODLASKIE: 'podlaskie'
+        POMORSKIE: 'pomorskie'
+        SLASKIE: 'śląskie'
+        SWIETOKRZYSKIE: 'świętokrzyskie'
+        WARMINSKO_MAZURSKIE: 'warmińsko-mazurskie'
+        WIELKOPOLSKIE: 'wielkopolskie'
+        ZACHODNIOPOMORSKIE: 'zachodniopomorskie'
+
+  basic_data: 'My information' #todo: zmienić?
+  fullname: 'Name and surname'
+  email: 'Email'
+
+  role: 'User roles'
+  roles:
+    ROLE_SUPERADMIN: 'Superadmin'
+    ROLE_ADMINISTRATION: 'Administration'
+    ROLE_INVESTIGATOR: 'Investigator'
+    ROLE_COORDINATOR: 'Coordinator'
+
+    ROLE_MONITOR: 'Monitor'
+    ROLE_PHARMACOVIGILANCE: 'Pharmacovigilance'
+
+    ROLE_SPONSOR: 'Sponsor'
+  status: 'Account status'
+  statuses:
+    ACTIVE: 'ACTIVE'
+    INACTIVE: 'INACTIVE'
+    BLOCKED: 'BLOCKED'
+

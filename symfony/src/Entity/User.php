@@ -46,11 +46,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $surname = null;
 
     #[ORM\OneToOne(targetEntity: 'Address')]
-    #[ORM\JoinColumn(name: 'address_id', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'address_id', referencedColumnName: 'id', nullable:  true)]
     private ?Address $address = null;
 
-    #[Orm\Column(type: 'date_immutable')]
-    private \DateTimeImmutable $createdAt;
+//    #[Orm\Column(type: 'date_immutable')]
+//    private \DateTimeImmutable $createdAt;
 
     /**
      * @return int|null
@@ -165,22 +165,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->address = $address;
     }
 
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getCreatedAt(): \DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
+//    /**
+//     * @return \DateTimeImmutable
+//     */
+//    public function getCreatedAt(): \DateTimeImmutable
+//    {
+//        return $this->createdAt;
+//    }
 
-    /**
-     * @param \DateTimeImmutable $createdAt
-     */
-    #[ORM\PrePersist]
-    public function setCreatedAt(\DateTimeImmutable $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
+//    /**
+//     * @param \DateTimeImmutable $createdAt
+//     */
+//    #[ORM\PrePersist]
+//    public function setCreatedAt(\DateTimeImmutable $createdAt): void
+//    {
+//        $this->createdAt = $createdAt;
+//    }
 
     public function eraseCredentials()
     {

@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   php:
-    container_name: lama_php
+    container_name: rotary_php
     build: ./docker/php
     restart: always
     user: "<CURRENT-ID>:1000"

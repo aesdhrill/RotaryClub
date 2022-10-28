@@ -1,5 +1,5 @@
-$primary: #f77702;
-$secondary: #578ad6;
+$primary: darken(#e79f44,10);
+$secondary: darken(#44e79e,15);
 $screening: #75ce7b;
 
 :root {
@@ -7,13 +7,12 @@ $screening: #75ce7b;
     --secondary: $secondary;
 }
 
-//@import "~startbootstrap-sb-admin/src/scss/styles";
-//@import "~select2";
+@import "~startbootstrap-sb-admin/src/scss/styles";
+@import "~select2";
 //@import "bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css";
 
-//@import "colors";
+@import "colors";
 
-@import "~bootstrap/scss/bootstrap.scss";
 
 body {
     background-color: #ffffff;

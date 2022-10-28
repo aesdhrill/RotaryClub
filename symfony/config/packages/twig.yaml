@@ -1,5 +1,12 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    paths:
+        '%kernel.project_dir%/assets/images': images
+    globals:
+        demo: '%env(bool:DEMO)%'
+    form_themes:
+        - 'bootstrap_5_layout.html.twig'
+        - '@TetranzSelect2Entity/Form/fields.html.twig'
 
 when@test:
     twig:

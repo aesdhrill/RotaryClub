@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\VoivodeshipType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -30,9 +31,9 @@ class Address
     #[Assert\NotBlank]
     private ?string $city = null;
 
-    #[ORM\Column(type: 'string', length: 1024, nullable: true)]
-    #[Assert\NotBlank]
-    private ?string $voivodeship = null;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Assert\Choice(callback: ['App\Enum\VoivodeshipType', 'getValues'])]
+    private ?int $voivodeship = null;
 
     #[ORM\Column(type: 'string', length: 1024, nullable: true)]
     #[Assert\NotBlank]

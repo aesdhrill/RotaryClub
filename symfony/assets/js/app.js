@@ -15,12 +15,20 @@ const $ = require('jquery');
 global.$ = global.jQuery = $;
 
 // start the Stimulus application
-import '../bootstrap';
+// import '../bootstrap';
+require('startbootstrap-sb-admin/dist/js/scripts');
 const bootstrap = require('bootstrap/dist/js/bootstrap.bundle.min');
 global.bootstrap = bootstrap;
+
+require('select2');
+
 
 $(function() {
   $('[data-bs-toggle="tooltip"]').each(function (_, ee) {
     return new bootstrap.Tooltip(ee)
+  });
+
+  $('.select2').select2({
+    'width': '100%'
   });
 })
