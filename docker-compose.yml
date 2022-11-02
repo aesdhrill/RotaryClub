@@ -50,18 +50,18 @@ services:
     healthcheck:
       disable: true
 
-#  cron:
-#    volumes:
-#      - ./docker/php/cron/:/etc/cron.d/
-#      - ./symfony/:/var/www/symfony/
-#      - ./cli/:/var/www/cli/
-#      - ./backups/postgres:/backups/postgres
-#      - ./symfony/public/uploads-real:/backups/uploads
-#    networks:
-#      - rotary
-#    command: ["cron", "-f"]
-#    labels:
-#      - "traefik.enable=false"
+  cron:
+    volumes:
+      - ./docker/php/cron/:/etc/cron.d/
+      - ./symfony/:/var/www/symfony/
+      - ./cli/:/var/www/cli/
+      - ./backups/postgres:/backups/postgres
+      - ./symfony/public/uploads-real:/backups/uploads
+    networks:
+      - rotary
+    command: ["cron", "-f"]
+    labels:
+      - "traefik.enable=false"
 
 volumes:
   postgres-db-rotary:
