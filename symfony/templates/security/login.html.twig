@@ -26,13 +26,16 @@
                     </div>
 
                     <div class="form-group" style="display: flex; justify-content: space-between;">
-{#                        <a href="{{ path('security_forgot_password') }}" class="btn btn-outline-dark">#}
-{#                            {{ 'common.forgot_password'|trans }}#}
+                        <a href="{{ path('security_forgot_password') }}" class="btn btn-outline-dark">
+                            {{ 'common.forgot_password'|trans }}
+                        </a>
+
+{#                        <a href="{{ path('security_signup') }}" class="btn btn-outline-dark">#}
+{#                            {{ 'common.signup'|trans }}#}
 {#                        </a>#}
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                        <button class="btn btn-primary" href="{{ path('') }}"></button>
 
                         <button class="btn btn-primary ms-auto" type="submit">
                             {{ 'common.log_in'|trans }}

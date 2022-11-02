@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Enum\UserStatus;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -49,8 +51,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(name: 'address_id', referencedColumnName: 'id', nullable:  true)]
     private ?Address $address = null;
 
-//    #[Orm\Column(type: 'date_immutable')]
-//    private \DateTimeImmutable $createdAt;
+    #[ORM\Column(type: 'integer', options: ['default' => UserStatus::INACTIVE])]
+    private int $status = UserStatus::INACTIVE;
+
+    #[ORM\Column(type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private \DateTime $validTo;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: 'Token', cascade: ['persist'])]
+    private Collection $tokens;
 
     /**
      * @return int|null
@@ -163,6 +171,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAddress(?Address $address): void
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getValidTo(): \DateTime
+    {
+        return $this->validTo;
+    }
+
+    /**
+     * @param \DateTime $validTo
+     */
+    public function setValidTo(\DateTime $validTo): void
+    {
+        $this->validTo = $validTo;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTokens(): Collection
+    {
+        return $this->tokens;
+    }
+
+    /**
+     * @param Collection $tokens
+     */
+    public function setTokens(Collection $tokens): void
+    {
+        $this->tokens = $tokens;
     }
 
 //    /**
