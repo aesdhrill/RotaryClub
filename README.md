@@ -4,8 +4,8 @@
 
 1. Download repository
 ```shell
-git clone >address<
-cd rotaryclub
+git clone https://github.com/aesdhrill/RotaryClub.git
+cd RotaryClub
 ```
 
 2. Copy config files
@@ -25,15 +25,12 @@ MAILER_PASS=null
 MAILER_HOST=null
 MAILER_PORT=42
 
-MAILER_TECH_USER=null
-MAILER_TECH_PASS=null
-MAILER_TECH_HOST=null
-MAILER_TECH_PORT=42
-
-POSTGRES_USER=rotaryclub
-POSTGRES_PASSWORD=rotaryclub
+POSTGRES_USER=
+POSTGRES_PASSWORD=
 POSTGRES_DB=rotaryclub
 
+EWZ_RECAPTCHA_SITE_KEY
+EWZ_RECAPTCHA_SECRET
 ```
 
 4. (Optional to enable backups) Give permissions to backup folder
@@ -64,17 +61,17 @@ docker-compose down && docker-compose up -d
 
 8. Install/update PHP packages
 ```shell
-docker exec -it lama_php composer install --ignore-platform-reqs
+docker exec -it rotary_php composer install --ignore-platform-reqs
 ```
 
 9. Install/update JS packages
 ```shell
-docker exec -u root -t lama_php yarn install
+docker exec -u root -t rotary_php yarn install
 ```
 
 10. Migrate DB to latest version
 ```shell
-docker exec -it lama_php bin/console doct:migr:migr
+docker exec -it rotary_php bin/console doct:migr:migr
 ```
 
 11. Build assets
@@ -84,7 +81,7 @@ docker exec -it lama_php bin/console doct:migr:migr
 ```
 or
 ```shell
-docker exec -u root -t lama_php yarn encore dev
+docker exec -u root -t rotary_php yarn encore dev
 ```
 If you want to refresh assets in real time add `--watch`
 
@@ -92,49 +89,75 @@ If you want to refresh assets in real time add `--watch`
 
 Create migration:
 ```shell
-docker exec -it lama_php bin/console doctrine:migrations:diff
+docker exec -it rotary_php bin/console doctrine:migrations:diff
 ```
 
 Migrate to latest version
 ```shell
-docker exec -it lama_php bin/console doctrine:migrations:migrate
+docker exec -it rotary_php bin/console doctrine:migrations:migrate
 ```
 
-## Testing
+[//]: # (## Testing)
 
-1. Copy config files
-```shell
-cp symfony/.env.test symfony/.env.test.local
-```
+[//]: # ()
+[//]: # (1. Copy config files)
 
-2. Fill `symfony/.env.test.local` with test configuration values
+[//]: # (```shell)
 
-3. (optional) Drop test database:
-```shell
-docker exec -t lama_php bin/console doctrine:database:drop -e test --force --if-exists
-```
+[//]: # (cp symfony/.env.test symfony/.env.test.local)
 
-4. Create test database:
-```shell
-docker exec -t lama_php bin/console doctrine:database:create -e test
-```
+[//]: # (```)
 
-5. Run migrations:
-```shell
-docker exec -it lama_php bin/console doctrine:migrations:migrate -e test
-```
+[//]: # ()
+[//]: # (2. Fill `symfony/.env.test.local` with test configuration values)
 
-6. Load fixtures:
-```shell
-docker exec -it lama_php bin/console doctrine:fixtures:load -e test
-```
+[//]: # ()
+[//]: # (3. &#40;optional&#41; Drop test database:)
 
-7. Run tests:
-```shell
-docker exec -t lama_php ./vendor/bin/phpunit
-```
+[//]: # (```shell)
 
-You can add `--coverage-text` to show test coverage.
+[//]: # (docker exec -t rotary_php bin/console doctrine:database:drop -e test --force --if-exists)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (4. Create test database:)
+
+[//]: # (```shell)
+
+[//]: # (docker exec -t rotary_php bin/console doctrine:database:create -e test)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (5. Run migrations:)
+
+[//]: # (```shell)
+
+[//]: # (docker exec -it rotary_php bin/console doctrine:migrations:migrate -e test)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (6. Load fixtures:)
+
+[//]: # (```shell)
+
+[//]: # (docker exec -it rotary_php bin/console doctrine:fixtures:load -e test)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (7. Run tests:)
+
+[//]: # (```shell)
+
+[//]: # (docker exec -t rotary_php ./vendor/bin/phpunit)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (You can add `--coverage-text` to show test coverage.)
 
 ## Production
 
@@ -152,39 +175,39 @@ cp -n docker-compose.prod.yml.dist docker-compose.prod.yml
 
 4. Build images locally
 ```shell
-docker build -t lama_php docker/php
-docker build -t lama_cron docker/php
+docker build -t rotary_php docker/php
+docker build -t rotary_cron docker/php
 ```
 
 4. Reload stack
 ```shell
-docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml lamaindiab
+docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml rotaryclub
 ```
 
 4. Clear cache
 ```shell
-docker exec -t lama_php bin/console c:c
+docker exec -t rotary_php bin/console c:c
 ```
 
 5. Migrate DB to latest version
 ```shell
-docker exec -it lama_php bin/console doct:migr:migr
+docker exec -it rotary_php bin/console doct:migr:migr
 ```
 
 6. Optimize Composer Autoloader
 ```shell
-docker exec -t lama_php composer dump-autoload --no-dev --classmap-authoritative
+docker exec -t rotary_php composer dump-autoload --no-dev --classmap-authoritative
 ```
 
 7. Build assets
 ```shell
-docker exec -u root -t lama_php yarn encore prod
+docker exec -u root -t rotary_php yarn encore prod
 ```
 
 x. Stop stack
 
 ```shell
-docker stack down lamaindiab
+docker stack down rotaryindiab
 ```
 
 # Documentation
@@ -202,7 +225,7 @@ $this->setTransport('med');
 
 ## Defining virtual columns
 
-1. Add `options={"virtual": true}` and `columnDefinition` to `@ORM\Column`
+1. Add `options: ['virtual' => true]` and `columnDefinition` to `@ORM\Column`
 
 2. You can also optionally add `"join": "<FULL JOIN STATEMENT>"` to `options` is needed
 
@@ -210,12 +233,12 @@ Example:
 ```php
 # App\Entity\*
 
-/**
- * @ORM\Column(type="<TYPE>", options={
- *     "virtual": true,
- *     "join": "<FULL JOIN STATEMENT>"
- * }, columnDefinition="<DEFINITION AS IN SQL SELECT>")
- */
+
+
+#[ORM\Column(type: '<TYPE>'), options: [
+    'virtual' => true,
+    'join' => '<FULL JOIN STATEMENT'>
+], columnDefinition: '<DEFINITION AS IN SQL SELECT>']
 private readonly bool $virtualColumn;
 ```
 
