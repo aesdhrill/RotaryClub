@@ -14,7 +14,7 @@ class RegistrationType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email', EmailType::class,[
-
+            'label' => 'common.email'
         ])
         >add('password', RepeatedType::class,[
             'type' => PasswordType::class,
