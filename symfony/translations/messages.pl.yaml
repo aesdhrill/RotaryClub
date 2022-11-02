@@ -46,11 +46,11 @@ menu:
 
 page_titles:
   forgot_password: 'Przypomnienie hasła'
-  login_welcome: 'Logowanie do systemu badania'
+  login_welcome: 'Logowanie do systemu'
   set_password: 'Ustawianie hasła'
 
 project:
-  acronym: 'Rethink'
+  acronym: 'RotaryClub'
   demo:
     ribbon: 'Demo version'
     alert:
