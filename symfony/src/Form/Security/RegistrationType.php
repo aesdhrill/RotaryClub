@@ -26,6 +26,9 @@ class RegistrationType extends BaseType
             'required' => true,
             'first_options'  => ['label' => 'form.signup.password'],
             'second_options' => ['label' => 'form.signup.password_repeat'],
+//            'attr' => [
+//                'class' => 'w-100'
+//            ]
         ])
         ->add('recaptcha', EWZRecaptchaV3Type::class, [
             'constraints' => [

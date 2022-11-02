@@ -1,0 +1,34 @@
+{% extends 'base_login.html.twig' %}
+
+{% block content %}
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col text-center">
+                <h1 class="h3 mb-0 text-gray-800">{{ 'page_titles.forgot_password'|trans }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-7 mt-3 px-4">
+                <p>{# TODO: trans #}
+                    Podaj następujące dane do zarejestrowania w systemie RotaryClub
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-7 p-4 pt-2">
+                {{ form_start(form) }}
+                {{ form_widget(form.email) }}
+                {{ form_widget(form.password,{'attr': {'class': 'task_field'}}) }}
+                <div class="form-group" style="display: flex; justify-content: space-between;">
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-dark">
+                        {{ 'common.back'|trans }}
+                    </a>
+                    {{ form_widget(form.save) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

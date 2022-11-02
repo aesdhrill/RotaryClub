@@ -1,0 +1,34 @@
+{% extends 'base_login.html.twig' %}
+
+{% block page_header %}{{ 'page_titles.set_password'|trans }}{% endblock %}
+
+{% block content %}
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <h1 class="h3 mb-0 text-gray-800">{{ 'page_titles.set_password'|trans }}</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 p-4 pt-5">
+                {{ form_start(form) }}
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="email-addon" style="width: 180px">{{ 'common.new_password'|trans }}</span>
+                    {{ form_widget(form.password.first) }}
+                    {{ form_errors(form.password.first) }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="email-addon" style="width: 180px">{{ 'common.repeat_new_password'|trans }}</span>
+                    {{ form_widget(form.password.second) }}
+                    {{ form_errors(form.password.second) }}
+                </div>
+                <div class="form-group d-flex justify-content-end">
+                    {{ form_widget(form.save) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -30,9 +30,9 @@
                             {{ 'common.forgot_password'|trans }}
                         </a>
 
-{#                        <a href="{{ path('security_signup') }}" class="btn btn-outline-dark">#}
-{#                            {{ 'common.signup'|trans }}#}
-{#                        </a>#}
+                        <a href="{{ path('security_signup') }}" class="btn btn-outline-dark mx-auto">
+                            {{ 'common.signup'|trans }}
+                        </a>
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 

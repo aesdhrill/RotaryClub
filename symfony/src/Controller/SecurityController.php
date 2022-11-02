@@ -6,6 +6,7 @@ use App\Entity\Token;
 use App\Entity\User;
 use App\Enum\TokenType;
 use App\Enum\UserStatus;
+use App\Form\Security\RegistrationType;
 use App\Form\Security\ResetPasswordType;
 use App\Form\Security\ForgotPasswordType;
 use App\Manager\TokenManager;
@@ -46,9 +47,16 @@ class SecurityController extends BaseController
     }
 
     #[Route(path: '/signup/', name: 'security_signup')]
-    public function signup(): Response
+    public function signup(
+        Request $request,
+        UserManager $userManager
+    ): Response
     {
-        return new Response(status: 200);
+        $form = $this->createForm(RegistrationType::class);
+
+        return $this->render('security/signup.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     #[Route(path: '/set_password/{value}', name: 'security_set_password')]
