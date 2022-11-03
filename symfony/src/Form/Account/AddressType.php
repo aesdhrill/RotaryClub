@@ -40,6 +40,9 @@ class AddressType extends BaseType
                     'class' => 'select2'
                 ]
             ])
+            ->add('country', TextType::class,[
+                'label' => 'user.address.country'
+            ])
             ->add('save', SubmitType::class,[
                 'label' => 'common.form.save',
                 'attr' => [

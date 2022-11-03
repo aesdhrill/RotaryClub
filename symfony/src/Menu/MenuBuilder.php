@@ -36,7 +36,7 @@ class MenuBuilder
             ],
         ]);
 
-        if ($this->security->isGranted('ROLE_COORDINATOR')){
+//        if ($this->security->isGranted('ROLE_ADMINISTRATION')){
             $menu->addChild('menu.admin', [
                 'uri' => '#',
                 'extras' => [
@@ -51,14 +51,7 @@ class MenuBuilder
                     'icon' => 'fas fa-users'
                 ]
             ]);
-
-            $menu['menu.admin']->addChild('menu.admin_users_new', [
-                'route' => 'admin_users_new',
-                'extras' => [
-                    'icon' => 'fas fa-user-plus'
-                ]
-            ]);
-        }
+//        }
 
 
 //

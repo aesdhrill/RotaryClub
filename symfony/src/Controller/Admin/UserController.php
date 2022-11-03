@@ -45,9 +45,6 @@ class UserController extends BaseController
         $statusForm = $this->createForm(StatusType::class, $user);
         $statusForm->handleRequest($request);
 
-        $expiryDateForm = $this->createForm(ExpiryDateType::class, $user);
-        $expiryDateForm->handleRequest($request);
-
         if ($rolesForm->isSubmitted() && $rolesForm->isValid()) {
             $userManager->save($rolesForm->getData());
 
@@ -74,68 +71,13 @@ class UserController extends BaseController
             ]);
         }
 
-        if ($expiryDateForm->isSubmitted() && $expiryDateForm->isValid()) {
-            $userManager->save($expiryDateForm->getData());
-
-            return $this->redirectToRoute('admin_users_details', [
-                'id' => $user->getId(),
-            ]);
-        }
-
 //        $logEntryHistory = $logEntryRepository->findAllForUser($user);
 
         return $this->render('system/admin/users/details.html.twig', [
             'user' => $user,
             'rolesForm' => $rolesForm->createView(),
             'statusForm' => $statusForm->createView(),
-            'expiryDateForm' => $expiryDateForm->createView(),
 //            'logEntryHistory' => $logEntryHistory,
-        ]);
-    }
-
-    #[Route(path: '/new', name: 'new')]
-    public function new(
-        Request $request, UserRepository $userRepository, UserManager $userManager,
-    ): Response {
-        $form = $this->createForm(NewUserType::class, null, [
-            'facilities' => new ArrayCollection($facilityRepository->findAll()),
-            'userFacilities' => $this->getUser()->getUserFacilities()->map(function($userFacility) {
-                return $userFacility->getFacility();
-            })
-        ]);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userFacilities = new ArrayCollection($this->getUser()->getUserFacilities()->map(function($userFacility) { return $userFacility->getFacility(); })->toArray());
-
-            /** @var User $newUser */
-            $newUser = $form->getData();
-            $userEmail = $newUser->getEmail();
-            $user = $userRepository->findOneBy(['email' => $userEmail]);
-
-            if (!$user){
-                $newUser->setPassword('WRONG_PASSWORD');
-                $newUser->setValidTo(new \DateTime('+1 month'));
-                $userManager->save($newUser);
-
-                /** @var Facility $facility */
-                foreach ($userFacilities as $facility) {
-                    $userFacility = new UserFacility();
-                    $userFacility->setUser($newUser);
-                    $userFacility->setFacility($facility);
-                    $userFacilityManager->save($userFacility);
-                }
-
-                $this->addFlash('success', $this->translator->trans('user.flash.user_added'));
-                return $this->redirectToRoute('admin_users_new');
-            }
-
-            $this->addFlash('warning', $this->translator->trans('user.flash.user_exists'));
-        }
-
-        return $this->render('system/admin/users/new.html.twig', [
-            'form' => $form->createView(),
         ]);
     }
 

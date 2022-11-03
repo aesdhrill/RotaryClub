@@ -48,6 +48,8 @@ class UserRepository extends ServiceEntityRepository
     ])]
     public function findForDt(Request $request, ?User $currentUser): array
     {
+
+        #TODO: fix this for Administration view
         $offset = $request->get('start');
         $orders = $request->get('order');
         $columns = $request->get('columns');

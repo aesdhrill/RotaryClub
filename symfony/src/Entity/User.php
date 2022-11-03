@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $surname = null;
 
-    #[ORM\OneToOne(targetEntity: 'Address')]
+    #[ORM\OneToOne(targetEntity: 'Address', cascade: ['persist'])]
     #[ORM\JoinColumn(name: 'address_id', referencedColumnName: 'id', nullable:  true)]
     private ?Address $address = null;
 

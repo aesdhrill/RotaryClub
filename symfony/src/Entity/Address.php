@@ -43,15 +43,10 @@ class Address
     #[Assert\NotBlank]
     private ?string $country = null;
 
-    #[ORM\Column(type: 'string', length: 8, nullable: true)]
-    #[Assert\NotBlank]
-    #[Assert\Regex(pattern: '/^[0-9]{2}-[0-9]{3}$/')]
-    private ?string $zipCode = null;
-
     public function __toString()
     {
         $aptNumText = $this->apartmentNumber?("m. " . $this->apartmentNumber . "\n"):"\n";
-        return "{$this->streetName} {$this->streetNumber} {$aptNumText}{$this->zipCode} {$this->city},\n{$this->voivodeship}\n{$this->country}";
+        return "{$this->streetName} {$this->streetNumber} {$aptNumText}{$this->postalCode} {$this->city},\n{$this->voivodeship}\n{$this->country}";
     }
 
     /**
@@ -62,5 +57,116 @@ class Address
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getStreetName(): ?string
+    {
+        return $this->streetName;
+    }
+
+    /**
+     * @param string|null $streetName
+     */
+    public function setStreetName(?string $streetName): void
+    {
+        $this->streetName = $streetName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStreetNumber(): ?string
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * @param string|null $streetNumber
+     */
+    public function setStreetNumber(?string $streetNumber): void
+    {
+        $this->streetNumber = $streetNumber;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getApartmentNumber(): ?string
+    {
+        return $this->apartmentNumber;
+    }
+
+    /**
+     * @param string|null $apartmentNumber
+     */
+    public function setApartmentNumber(?string $apartmentNumber): void
+    {
+        $this->apartmentNumber = $apartmentNumber;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string|null $city
+     */
+    public function setCity(?string $city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @param string|null $postalCode
+     */
+    public function setPostalCode(?string $postalCode): void
+    {
+        $this->postalCode = $postalCode;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getVoivodeship(): ?int
+    {
+        return $this->voivodeship;
+    }
+
+    /**
+     * @param int|null $voivodeship
+     */
+    public function setVoivodeship(?int $voivodeship): void
+    {
+        $this->voivodeship = $voivodeship;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string|null $country
+     */
+    public function setCountry(?string $country): void
+    {
+        $this->country = $country;
+    }
 
 }
