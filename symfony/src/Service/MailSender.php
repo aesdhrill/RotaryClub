@@ -118,7 +118,6 @@ class MailSender
             htmlTemplate: 'emails/' . $this->translator->getLocale() . '/reset_password.html.twig',
             templateContext: [
                 'token' => $token->getValue(),
-//                'person' => $person,
             ]
         );
     }
@@ -128,15 +127,14 @@ class MailSender
         dump('in mailer');
 
         dump($user, $token);
-//        $this->setTransport('tech');
-//        $this->send(
-//            $this->translator->trans('project.acronym') . ' - ' . $this->translator->trans('emails.titles.activate_account'),
-//            [$user],
-//            htmlTemplate: 'emails/' . $this->translator->getLocale() . '/activate_account.html.twig',
-//            templateContext: [
-//                'token' => $token->getValue(),
-//            ]
-//        );
+        $this->send(
+            $this->translator->trans('project.acronym') . ' - ' . $this->translator->trans('emails.titles.activate_account'),
+            [$user],
+            htmlTemplate: 'emails/' . $this->translator->getLocale() . '/activate_account.html.twig',
+            templateContext: [
+                'token' => $token->getValue(),
+            ]
+        );
     }
 
     public function setTransport(string $transportName): MailSender

@@ -1,0 +1,29 @@
+{% extends 'emails/pl/base.html.twig' %}
+
+{% block content %}
+    <p>
+        Szanowny Panie/Szanowna Pani,
+    </p>
+
+    <p class="justify">
+        Rejestrował się Pan/Pani do systemu <b>{{ 'project.acronym'|trans(locale='pl') }}</b>.<br>
+        Prosimy o potwierdzenie adresu email przez kliknięcie w przycisk poniżej.<br>
+    </p>
+
+    <p class="text-center m-1">
+        <a href="{{ absolute_url(path('security_activate_account', {'value': token})) }}">
+            <span class="btn btn-primary"><strong>Aktywuj konto</strong></span>
+        </a>
+    </p>
+
+    <p class="justify">
+        W przypadku gdy przycisk nie działa, skopiuj poniższy link do paska adresowego swojej przeglądarki by aktywować konto.
+    </p>
+    <p>
+        <a href="{{ absolute_url(path('security_activate_account', {'value': token})) }}">
+            {{ absolute_url(path('security_activate_account', {'value': token})) }}
+        </a>
+    </p>
+
+
+{% endblock %}

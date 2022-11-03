@@ -42,6 +42,14 @@ class Token
     }
 
     /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getValue(): string

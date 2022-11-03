@@ -32,7 +32,7 @@ class Address
     private ?string $city = null;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    #[Assert\Choice(callback: ['App\Enum\VoivodeshipType', 'getValues'])]
+    #[Assert\Choice(callback: [VoivodeshipType::class, 'getValues'])]
     private ?int $voivodeship = null;
 
     #[ORM\Column(type: 'string', length: 1024, nullable: true)]

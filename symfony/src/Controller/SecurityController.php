@@ -7,11 +7,14 @@ use App\Entity\User;
 use App\Enum\TokenType;
 use App\Enum\UserStatus;
 use App\Form\Security\RegistrationType;
+use App\Form\Security\ResendActivationEmailType;
 use App\Form\Security\ResetPasswordType;
 use App\Form\Security\ForgotPasswordType;
 use App\Manager\TokenManager;
 use App\Manager\UserManager;
+use App\Repository\TokenRepository;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,11 +26,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends BaseController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response {
-
+    public function login(AuthenticationUtils $authenticationUtils): RedirectResponse|Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('dashboard_index');
         }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -69,12 +72,13 @@ class SecurityController extends BaseController
             if (!$user){
                 $pass = $passwordEncoder->hashPassword($newUser,$newUser->getPassword());
                 $newUser->setPassword($pass);
-                $newUser->setValidTo(new \DateTime('+1 month'));
+                $newUser->setValidTo(new \DateTime());
                 $token = new Token();
                 $token->setType(TokenType::ACTIVATE_ACCOUNT);
-                $token->setValidTo(new \DateTime('+1 month'));
+                $token->setValidTo(new \DateTime('+1day'));
 
                 $userManager->save($newUser);
+
                 #only add user to token post-persist;
                 $token->setUser($newUser);
                 $tokenManager->save($token);
@@ -93,6 +97,61 @@ class SecurityController extends BaseController
         return $this->render('security/signup.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    #[Route(path: 'activate', name: 'security_activate_resend')]
+    public function activateResend(Request $request, TokenRepository $tokenRepository, ?string $email): RedirectResponse|Response
+    {
+        $token = $tokenRepository->findOneBy(
+            ['value' => $request->get('token')]
+        );
+
+        dump($request->get('token'), $token, $email);
+
+        $formOptions['email'] = $token->getUser()->getEmail();
+
+        $form = $this->createForm(ResendActivationEmailType::class, null, $formOptions);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            $this->mailer->sendSignUp($token->getUser(), $token);
+
+            $this->addFlash('success', $this->translator->trans('security.flashes.activation_sent'));
+            return $this->redirectToRoute('app_logout');
+        }
+
+        return $this->render('security/confirm_email.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route(path: 'activate/{value}', name: 'security_activate_account')]
+    public function activateAccount(
+        Token $token,
+        Request $request,
+        UserManager $userManager
+    ): RedirectResponse|Response {
+        if (!TokenType::isValidForActivation($token->getType())) {
+            $this->addFlash('error', $this->translator->trans('security.flashes.wrong_token'));
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($token->getValidTo() < (new \DateTime())) {
+            $this->addFlash('warning', $this->translator->trans('security.flashes.invalid_token'));
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        $user = $token->getUser();
+        $user->setStatus(UserStatus::ACTIVE);
+
+        $userManager->save($user);
+
+        $this->addFlash('success', $this->translator->trans('security.flashes.activation_ok'));
+
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route(path: '/set_password/{value}', name: 'security_set_password')]

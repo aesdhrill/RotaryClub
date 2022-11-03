@@ -22,8 +22,22 @@ class TokenType
         ];
     }
 
+    public static function getTokenTypesForActivation()
+    {
+        return [
+            self::ACTIVATE_ACCOUNT
+        ];
+    }
+
     public static function isValidForSettingPassword(int $tokenType): bool
     {
         return in_array($tokenType, self::getTokenTypesForSettingPassword());
     }
+
+    public static function isValidForActivation(int $tokenType): bool
+    {
+        return in_array($tokenType, self::getTokenTypesForActivation());
+    }
+
+
 }
