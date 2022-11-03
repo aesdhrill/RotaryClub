@@ -12,23 +12,13 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-8 p-4 pt-5">
+            <div class="p-3 pb-0 col-8 text-justify">
+                <p>
+                    {{ 'security.activate_account'|trans }}
+                </p>
+            </div>
+            <div class="col-8 p-3">
                 {{ form(form) }}
-{#                {{ form_start(form) }}#}
-{#                <div class="input-group mb-3">#}
-{#                    <span class="input-group-text" id="email-addon" style="width: 180px">{{ 'common.new_password'|trans }}</span>#}
-{#                    {{ form_widget(form.password.first) }}#}
-{#                    {{ form_errors(form.password.first) }}#}
-{#                </div>#}
-{#                <div class="input-group mb-3">#}
-{#                    <span class="input-group-text" id="email-addon" style="width: 180px">{{ 'common.repeat_new_password'|trans }}</span>#}
-{#                    {{ form_widget(form.password.second) }}#}
-{#                    {{ form_errors(form.password.second) }}#}
-{#                </div>#}
-{#                <div class="form-group d-flex justify-content-end">#}
-{#                    {{ form_widget(form.save) }}#}
-{#                </div>#}
-{#                {{ form_end(form) }}#}
             </div>
         </div>
     </div>

@@ -15,25 +15,16 @@ class ResendActivationEmailType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class,[
-                'label' => 'form.signup.activate.email',
-                'mapped' => false,
-                'data' => $options['email']
-            ])
             ->add('recaptcha', EWZRecaptchaV3Type::class, [
                 'constraints' => [
                     new IsTrueV3(),
                 ]
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'form.signup.activate.submit'
+                'label' => 'form.signup.activate.submit',
+                'attr' => [
+                    'class' => 'btn btn-primary w-100 text-center'
+                ]
             ]);
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'email' => null,
-        ]);
     }
 }

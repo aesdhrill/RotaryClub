@@ -39,6 +39,9 @@ common:
 
 form:
   signup:
+    activate:
+      email: 'Email do wysłania linku aktywującego'
+      submit: 'Wyślij'
     password: 'Hasło'
     password_repeat: 'Powtórz hasło'
 
@@ -52,6 +55,7 @@ menu:
 page_titles:
   forgot_password: 'Przypomnienie hasła'
   login_welcome: 'Logowanie do systemu'
+  resend_email: 'Aktywacja konta'
   set_password: 'Ustawianie hasła'
   signup: 'Rejestracja'
 
@@ -70,6 +74,7 @@ project:
     author: ''
 
 security:
+  activate_account: 'Do użycia platformy wymagana jest aktywacja konta poprzez potwierdzenie adresu email. Sprawdź swoją skrzynkę mailową, lub kliknij przycisk poniżej aby wysłać link aktywacyjny ponownie'
   logout_tooltip: 'Po tym czasie bez aktywności zostaniesz wylogowany'
   flashes:
     invalid_token: 'Nieważny token. Proszę skorzystać z opcji resetowania hasła, żeby uzyskać nowy link.'

@@ -106,11 +106,8 @@ class SecurityController extends BaseController
         $token = $tokenRepository->findOneBy(
             ['value' => $request->get('token')]
         );
-        
 
-        $formOptions['email'] = $token->getUser()->getEmail();
-
-        $form = $this->createForm(ResendActivationEmailType::class, null, $formOptions);
+        $form = $this->createForm(ResendActivationEmailType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
