@@ -2,6 +2,7 @@
 
 namespace App\Form\Security;
 
+use App\Entity\User;
 use App\Form\BaseType;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaV3Type;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrueV3;
@@ -22,7 +23,7 @@ class RegistrationType extends BaseType
         ->add('password', RepeatedType::class,[
             'type' => PasswordType::class,
             'invalid_message' => 'errors.password.mismatch',
-            'options' => ['attr' => ['class' => 'password-field']],
+            'options' => ['attr' => ['class' => 'password-field w-100']],
             'required' => true,
             'first_options'  => ['label' => 'form.signup.password'],
             'second_options' => ['label' => 'form.signup.password_repeat'],
@@ -43,6 +44,7 @@ class RegistrationType extends BaseType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'data_class' => User::class,
             'validation_groups' => ['signup'],
         ]);
     }

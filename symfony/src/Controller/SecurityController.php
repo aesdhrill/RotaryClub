@@ -49,10 +49,46 @@ class SecurityController extends BaseController
     #[Route(path: '/signup/', name: 'security_signup')]
     public function signup(
         Request $request,
+        TokenManager $tokenManager,
+        UserPasswordHasherInterface $passwordEncoder,
+        UserRepository $userRepository,
         UserManager $userManager
-    ): Response
+    ): RedirectResponse|Response
     {
         $form = $this->createForm(RegistrationType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+            /** @var User $newUser */
+            $newUser = $form->getData();
+            $userEmail = $newUser->getEmail();
+            $user = $userRepository->findOneBy(['email' => $userEmail]);
+
+            #check if user already exists;
+            if (!$user){
+                $pass = $passwordEncoder->hashPassword($newUser,$newUser->getPassword());
+                $newUser->setPassword($pass);
+                $newUser->setValidTo(new \DateTime('+1 month'));
+                $token = new Token();
+                $token->setType(TokenType::ACTIVATE_ACCOUNT);
+                $token->setValidTo(new \DateTime('+1 month'));
+
+                $userManager->save($newUser);
+                #only add user to token post-persist;
+                $token->setUser($newUser);
+                $tokenManager->save($token);
+
+                $this->mailer->sendSignUp($newUser, $token);
+
+                dump($newUser, $token);
+                $this->addFlash('success', $this->translator->trans('security.flashes.registered'));
+
+                return $this->redirectToRoute('app_login');
+            }
+
+            $this->addFlash('warning', $this->translator->trans('security.user_exists'));
+        }
 
         return $this->render('security/signup.html.twig', [
             'form' => $form->createView()

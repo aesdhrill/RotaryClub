@@ -7,7 +7,12 @@ twig:
     form_themes:
         - 'bootstrap_5_layout.html.twig'
         - '@TetranzSelect2Entity/Form/fields.html.twig'
-
+        - '@EWZRecaptcha/Form/v3/ewz_recaptcha_widget.html.twig'
+when@debug:
+    twig:
+        cache: false
+        debug: '%kernel.debug%'
+        auto_reload: true
 when@test:
     twig:
         strict_variables: true

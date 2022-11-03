@@ -125,15 +125,18 @@ class MailSender
 
     public function sendSignUp(User $user, Token $token): void
     {
-        $this->setTransport('tech');
-        $this->send(
-            $this->translator->trans('project.acronym') . ' - ' . $this->translator->trans('emails.titles.activate_account'),
-            [$user],
-            htmlTemplate: 'emails/' . $this->translator->getLocale() . '/activate_account.html.twig',
-            templateContext: [
-                'token' => $token->getValue(),
-            ]
-        );
+        dump('in mailer');
+
+        dump($user, $token);
+//        $this->setTransport('tech');
+//        $this->send(
+//            $this->translator->trans('project.acronym') . ' - ' . $this->translator->trans('emails.titles.activate_account'),
+//            [$user],
+//            htmlTemplate: 'emails/' . $this->translator->getLocale() . '/activate_account.html.twig',
+//            templateContext: [
+//                'token' => $token->getValue(),
+//            ]
+//        );
     }
 
     public function setTransport(string $transportName): MailSender

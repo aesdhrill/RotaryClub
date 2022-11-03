@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col text-center">
-                <h1 class="h3 mb-0 text-gray-800">{{ 'page_titles.forgot_password'|trans }}</h1>
+                <h1 class="h3 mb-0 text-gray-800">{{ 'page_titles.signup'|trans }}</h1>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -15,12 +15,13 @@
                     Podaj następujące dane do zarejestrowania w systemie RotaryClub
                 </p>
             </div>
-        </div>
+
         <div class="row justify-content-center">
             <div class="col-7 p-4 pt-2">
                 {{ form_start(form) }}
-                {{ form_widget(form.email) }}
-                {{ form_widget(form.password,{'attr': {'class': 'task_field'}}) }}
+                {{ form_row(form.email) }}
+{#                {{ form_widget(form.password,{'attr': {'class': 'task_field'}}) }}#}
+                {{ form_row(form.password) }}
                 <div class="form-group" style="display: flex; justify-content: space-between;">
                     <a href="{{ path('app_login') }}" class="btn btn-outline-dark">
                         {{ 'common.back'|trans }}

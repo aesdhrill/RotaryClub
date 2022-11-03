@@ -7,35 +7,40 @@ account:
     change_password: 'Zmień hasło'
 
 common:
-  current_password: 'Current password'
-  new_password: 'New password'
-  repeat_new_password: 'Reenter new password'
-  delete_selected: 'Delete selected'
-  instruction: 'Manual'
-  back: 'Back'
-  yes: 'Yes'
-  no: 'No'
-  no_data: 'No data'
-  close: 'Close'
-  skip_temporary: 'Skip (temporarily)'
+  current_password: 'Obecne hasło'
+  new_password: 'Nowe hasło'
+  repeat_new_password: 'Powtórz nowe hasło'
+  delete_selected: 'Usuń wybrane'
+  instruction: 'Instrukcja'
+  back: 'Wstecz'
+  yes: 'Tak'
+  no: 'Nie'
+  no_data: 'Brak danych'
+  close: 'Zamknij'
+  skip_temporary: 'Pomiń (tymczasowo)'
+  signup: 'Zarejestruj się'
 
   form:
     answer_placeholder: 'Your answer...'
-    cancel: 'Cancel'
+    cancel: 'Anuluj'
     dropzone_placeholder: 'Drag and drop files to upload, or click to view current files'
     file:
-      view_current: 'View current'
-    save: 'Save'
-    save_continue: 'Save and continue'
-    select_placeholder: 'Choose...'
-    send: 'Send'
-
-  log_in: 'Log in'
-  log_out: 'Log out'
+      view_current: 'Zobacz obecny'
+    save: 'Zapisz'
+    save_continue: 'Zapisz i przejdź dalej'
+    select_placeholder: 'Wybierz...'
+    send: 'Wyślij'
+  log_in: 'Zaloguj się'
+  log_out: 'Wyloguj się'
   email: 'Email'
-  password: 'Password'
-  forgot_password: 'Forgot my password'
-  none: 'None'
+  password: 'Hasło'
+  forgot_password: 'Zapomniałem hasła'
+  none: 'Żadne'
+
+form:
+  signup:
+    password: 'Hasło'
+    password_repeat: 'Powtórz hasło'
 
 menu:
   admin: 'Administration'
@@ -48,6 +53,7 @@ page_titles:
   forgot_password: 'Przypomnienie hasła'
   login_welcome: 'Logowanie do systemu'
   set_password: 'Ustawianie hasła'
+  signup: 'Rejestracja'
 
 project:
   acronym: 'RotaryClub'
