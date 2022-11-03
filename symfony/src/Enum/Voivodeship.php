@@ -4,7 +4,7 @@ namespace App\Enum;
 
 use ReflectionClass;
 
-class VoivodeshipType
+class Voivodeship
 {
     public const DOLNOSLASKIE = 1;
     public const KUJAWSKO_POMORSKIE = 2;
@@ -28,7 +28,7 @@ class VoivodeshipType
         return (new ReflectionClass(__CLASS__))->getConstants();
     }
 
-    public static function getValuesTranslated(?string $prefix = 'day_of_week.'): array
+    public static function getValuesTranslated(?string $prefix = 'user.address.voivodeship'): array
     {
         $statuses = self::getValues();
 

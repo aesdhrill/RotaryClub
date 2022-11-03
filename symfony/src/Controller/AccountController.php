@@ -15,11 +15,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route(path: '/account', name: 'account_')]
+#[Route(path: '/profile', name: 'account_')]
 #[IsGranted('ROLE_USER')]
 class AccountController extends BaseController
 {
-    #[Route(path: '/settings', name: 'settings')]
+    #[Route(path: '', name: 'settings')]
     public function settings(Request $request, UserManager $userManager, UserPasswordHasherInterface $passwordHasher): RedirectResponse|Response
     {
         /** @var User $user */
