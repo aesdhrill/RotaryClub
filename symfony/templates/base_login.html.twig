@@ -48,6 +48,7 @@
     </div>
 </div>
 {% block javascripts %}
+
     <script>
         {#let cookiePath = '{{ path('main_page_gdpr') }}';#}
         let httpHost = '{{ app.environment == 'dev' ? 'localhost' : app.request.httpHost }}';
