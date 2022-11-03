@@ -100,13 +100,13 @@ class SecurityController extends BaseController
     }
 
     #[Route(path: 'activate', name: 'security_activate_resend')]
-    public function activateResend(Request $request, TokenRepository $tokenRepository, ?string $email): RedirectResponse|Response
+    public function activateResend(Request $request, TokenRepository $tokenRepository): RedirectResponse|Response
     {
+
         $token = $tokenRepository->findOneBy(
             ['value' => $request->get('token')]
         );
-
-        dump($request->get('token'), $token, $email);
+        
 
         $formOptions['email'] = $token->getUser()->getEmail();
 

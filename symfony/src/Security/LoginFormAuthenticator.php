@@ -50,19 +50,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         /** @var User $user */
         $user = $token->getUser();
 
-//        $this->saveLoginAttempt($request, true, $user);
-//        dump($this->getTargetPath($request->getSession(), $firewallName));
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-//            dump('got $targetPath');
-//            dd( new RedirectResponse($targetPath));
             $redirectResponse = new RedirectResponse($targetPath);
-//            dd($redirectResponse, $redirectResponse->headers);
             return $redirectResponse;
         }
 
         $redirectResponse = new RedirectResponse($this->urlGenerator->generate('dashboard_index'));
-//        dd($redirectResponse, $redirectResponse->headers);
-//        dump($this->urlGenerator->generate('dashboard_index'));
         return $redirectResponse;
     }
 
