@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Account\AddressType;
 use App\Form\Account\NameSurnameType;
-//use App\Form\Account\PhoneType;
 use App\Form\Security\ChangePasswordType;
 use App\Manager\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -24,6 +24,21 @@ class AccountController extends BaseController
     {
         /** @var User $user */
         $user = $this->getUser();
+
+        $addressForm = $this->createForm(AddressType::class);
+        $addressForm->handleRequest($request);
+        if ($addressForm->isSubmitted() && $addressForm->isValid()) {
+            $address = $addressForm->getData();
+            dump($address);
+
+            $user->setAddress($address);
+            $userManager->save($user);
+
+            $this->addFlash('success', $this->translator->trans('account.settings.flash.data_changed'));
+
+            return $this->redirectToRoute('account_settings');
+
+        }
 
         $passwordForm = $this->createForm(ChangePasswordType::class);
         $passwordForm->handleRequest($request);
@@ -66,6 +81,7 @@ class AccountController extends BaseController
 
         return $this->render('system/account/settings.html.twig', [
             'user' => $user,
+            'addressForm' => $addressForm->createView(),
             'passwordForm' => $passwordForm->createView(),
             'nameSurnameForm' => $nameSurnameForm->createView(),
 //            'phoneForm' => $phoneForm->createView(),

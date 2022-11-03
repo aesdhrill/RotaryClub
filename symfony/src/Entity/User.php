@@ -54,9 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', options: ['default' => UserStatus::INACTIVE])]
     private int $status = UserStatus::INACTIVE;
 
-    #[ORM\Column(type: 'datetime', nullable: false, options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private \DateTime $validTo;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: 'Token', cascade: ['persist'])]
     private Collection $tokens;
 
@@ -192,22 +189,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(int $status): void
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getValidTo(): \DateTime
-    {
-        return $this->validTo;
-    }
-
-    /**
-     * @param \DateTime $validTo
-     */
-    public function setValidTo(\DateTime $validTo): void
-    {
-        $this->validTo = $validTo;
     }
 
     /**

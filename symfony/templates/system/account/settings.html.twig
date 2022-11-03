@@ -47,29 +47,11 @@
                                     <td>{{ 'account.settings.my_data.email'|trans }}</td>
                                     <td>{{ user.email }}</td>
                                 </tr>
-                                <tr>
-                                    <td>{{ 'account.settings.my_data.valid_to'|trans }}</td>
-                                    <td>{{ user.validTo|date('Y-m-d') }}</td>
-                                </tr>
-                                {# todo: uncomment if we want to separate facilities #}
-{#                                {% if user.userFacilities is not empty %}#}
-{#                                    <tr>#}
-{#                                        <td>{{ 'account.settings.my_data.facilities'|trans }}</td>#}
-{#                                        <td>#}
-{#                                            {% for userFacility in user.userFacilities %}#}
-{#                                                {{ userFacility.facility.name }}<br>#}
-{#                                            {% endfor %}#}
-{#                                        </td>#}
-{#                                    </tr>#}
-{#                                {% endif %}#}
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
             {{ form_start(passwordForm) }}
             <div class="card border-left-primary shadow">
                 <div class="card-header collapsed" data-bs-toggle="collapse" data-bs-target="#settings-password">
@@ -90,6 +72,21 @@
                 </div>
             </div>
             {{ form_end(passwordForm) }}
+            </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">{{ 'account.settings.address'|trans }}</div>
+                <div class="card-body" id="settings-address">
+                    {{ form_start(addressForm) }}
+                    {{ form_end(addressForm) }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+
         </div>
 
     </div>

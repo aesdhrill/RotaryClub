@@ -28,10 +28,10 @@ class Voivodeship
         return (new ReflectionClass(__CLASS__))->getConstants();
     }
 
-    public static function getValuesTranslated(?string $prefix = 'user.address.voivodeship'): array
+    public static function getValuesTranslated(?string $prefix = 'user.address.voivodeships.',): array
     {
-        $statuses = self::getValues();
+        $voivodeships = self::getValues();
 
-        return array_combine(array_map(static fn($status) => $prefix.$status, array_keys($statuses)), $statuses);
+        return array_combine(array_map(static fn($status) => $prefix.$status, array_keys($voivodeships)), $voivodeships);
     }
 }

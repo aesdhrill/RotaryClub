@@ -3,9 +3,7 @@
 namespace App\Form\User;
 
 use App\Entity\User;
-use App\Enum\UserPPStatus;
 use App\Enum\UserRole;
-use App\Repository\FacilityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

@@ -3,10 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Controller\BaseController;
-use App\Entity\Facility;
 use App\Entity\Token;
 use App\Entity\User;
-use App\Entity\UserFacility;
 use App\Enum\TokenType;
 use App\Enum\UserRole;
 use App\Enum\UserStatus;
@@ -15,9 +13,7 @@ use App\Form\User\NewUserType;
 use App\Form\User\RolesType;
 use App\Form\User\StatusType;
 use App\Manager\TokenManager;
-use App\Manager\UserFacilityManager;
 use App\Manager\UserManager;
-use App\Repository\FacilityRepository;
 use App\Repository\LogEntryRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -100,7 +96,6 @@ class UserController extends BaseController
     #[Route(path: '/new', name: 'new')]
     public function new(
         Request $request, UserRepository $userRepository, UserManager $userManager,
-        FacilityRepository $facilityRepository, UserFacilityManager $userFacilityManager
     ): Response {
         $form = $this->createForm(NewUserType::class, null, [
             'facilities' => new ArrayCollection($facilityRepository->findAll()),

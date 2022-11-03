@@ -1,9 +1,20 @@
+const $ = require('jquery');
+
 function openCard($this) {
   $this.closest('.card').find('.account_edit_card_form').fadeIn(0);
   $this.closest('.card').find('.account_card_show').fadeOut(0);
 }
 
 $(function () {
+  $('.select2').select2({
+    selectOnClose: true,
+    closeOnSelect: true,
+  });
+
+  $(document).on('select2:open', function (e) {
+    document.querySelector('.select2-search__field').focus();
+  });
+
   $('.account_edit_btn').on('click', function () {
     $(this).closest('.account_show').siblings('.account_edit_form').fadeIn(0);
     $(this).closest('.account_show').fadeOut(0);

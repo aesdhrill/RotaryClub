@@ -2,18 +2,18 @@
 
 namespace App\Manager;
 
-use App\Entity\UserFacility;
+use App\Entity\Address;
 use Doctrine\ORM\EntityManagerInterface;
 
-class UserFacilityManager
+class AddressManager
 {
     public function __construct(
         private EntityManagerInterface $entityManager
     ) {}
 
-    public function save(UserFacility $userFacility): void
+    public function save(Address $address): void
     {
-        $this->entityManager->persist($userFacility);
+        $this->entityManager->persist($address);
         $this->entityManager->flush();
     }
 }

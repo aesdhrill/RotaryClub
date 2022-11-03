@@ -27,8 +27,4 @@ $(function() {
   $('[data-bs-toggle="tooltip"]').each(function (_, ee) {
     return new bootstrap.Tooltip(ee)
   });
-
-  $('.select2').select2({
-    'width': '100%'
-  });
 })
